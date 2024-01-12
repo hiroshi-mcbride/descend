@@ -79,6 +79,7 @@ height = 5.0
 
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_d6k51")
+mouse_sensitivity = 0.5
 
 [node name="feller2" parent="." instance=ExtResource("1_cn2ha")]
 
@@ -90,6 +91,7 @@ attributes = SubResource("CameraAttributesPractical_bn8cq")
 current = true
 
 [node name="torso" parent="feller2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.701847)
 mesh = SubResource("ArrayMesh_5qpps")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

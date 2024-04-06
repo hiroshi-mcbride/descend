@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://vlo3pwlffxat"]
+[gd_scene load_steps=17 format=3 uid="uid://vlo3pwlffxat"]
 
 [ext_resource type="PackedScene" uid="uid://dlumhgvhn88js" path="res://agents/player.tscn" id="1_quota"]
 [ext_resource type="PackedScene" uid="uid://c7iq3ywt42bqg" path="res://statics/terrain/corridor.tscn" id="2_g8ogu"]
@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://dosfkfvl5bgm5" path="res://statics/lights/torch.tscn" id="4_ewc3g"]
 [ext_resource type="Texture2D" uid="uid://ck587o551cext" path="res://textures/frame003.png" id="5_vih17"]
 [ext_resource type="Material" uid="uid://ct8f4g2dumoti" path="res://fx/volumetric/black_fog.tres" id="6_3d8rb"]
+[ext_resource type="PackedScene" uid="uid://dx3ul5iu3wu66" path="res://statics/terrain/floor_half.tscn" id="7_aab43"]
 [ext_resource type="PackedScene" uid="uid://dmcsyggoxrvvs" path="res://agents/downer.tscn" id="8_cxf8p"]
 [ext_resource type="Script" path="res://src/scene_trigger.gd" id="9_elukc"]
+[ext_resource type="PackedScene" uid="uid://cwqw5eu3v5331" path="res://statics/terrain/block.tscn" id="10_d2i06"]
 [ext_resource type="PackedScene" uid="uid://bcjqelvsqhhj5" path="res://agents/hopper_2.tscn" id="10_gyxfl"]
 
 [sub_resource type="Environment" id="Environment_3imyl"]
@@ -88,11 +90,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -48)
 [node name="corridor5" parent="environment" instance=ExtResource("2_g8ogu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -64)
 
-[node name="corridor6" parent="environment" instance=ExtResource("2_g8ogu")]
+[node name="floor3" parent="environment/corridor5" instance=ExtResource("3_237yp")]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 14.3725, -20.9337)
+
+[node name="corridor6" type="Node3D" parent="environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -80)
 
-[node name="floor3" parent="environment/corridor6" instance=ExtResource("3_237yp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+[node name="floor" parent="environment/corridor6" instance=ExtResource("3_237yp")]
+
+[node name="floor_half" parent="environment/corridor6" instance=ExtResource("7_aab43")]
+
+[node name="wall" parent="environment/corridor6" instance=ExtResource("3_r3k2u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, 4)
+
+[node name="wall3" parent="environment/corridor6" instance=ExtResource("3_r3k2u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 4)
 
 [node name="torch" parent="environment" instance=ExtResource("4_ewc3g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.82409, 4.31295, -9.55118)
@@ -112,12 +124,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.82409, 4.31295, -79.2627)
 [node name="torch6" parent="environment" instance=ExtResource("4_ewc3g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.57392, 4.31295, -79.2627)
 
-[node name="torch7" parent="environment" instance=ExtResource("4_ewc3g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.82409, 0.39242, -103.116)
-
-[node name="torch8" parent="environment" instance=ExtResource("4_ewc3g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.57392, 0.39242, -103.116)
-
 [node name="SpotLight3D" type="SpotLight3D" parent="environment"]
 transform = Transform3D(-1, 2.06546e-08, 9.02842e-16, 0, -4.37114e-08, 1, 2.06546e-08, 1, 4.37114e-08, 1.59204e-06, 302.228, -265.954)
 light_energy = 512.0
@@ -131,19 +137,61 @@ transform = Transform3D(-1.02113, 0, -2.43538e-08, 0, 1.02113, 0, 2.43538e-08, 0
 mesh = SubResource("BoxMesh_0onki")
 skeleton = NodePath("../..")
 
+[node name="wall5" parent="environment" instance=ExtResource("3_r3k2u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, -92)
+
+[node name="wall6" parent="environment" instance=ExtResource("3_r3k2u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, -92)
+
+[node name="floor_half3" parent="environment" instance=ExtResource("7_aab43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, -92)
+
+[node name="floor_half4" parent="environment" instance=ExtResource("7_aab43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -92)
+
+[node name="wall3" parent="environment" instance=ExtResource("3_r3k2u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, -84)
+
+[node name="wall4" parent="environment" instance=ExtResource("3_r3k2u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, -84)
+
+[node name="wall7" parent="environment" instance=ExtResource("3_r3k2u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 8, -92)
+
+[node name="wall8" parent="environment" instance=ExtResource("3_r3k2u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 8, -92)
+
+[node name="wall9" parent="environment" instance=ExtResource("3_r3k2u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 8, -84)
+
+[node name="wall10" parent="environment" instance=ExtResource("3_r3k2u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 8, -84)
+
+[node name="block" parent="environment" instance=ExtResource("10_d2i06")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, -100)
+
+[node name="block2" parent="environment" instance=ExtResource("10_d2i06")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4, 0, -100)
+
+[node name="block3" parent="environment" instance=ExtResource("10_d2i06")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, -4, -96)
+
+[node name="block4" parent="environment" instance=ExtResource("10_d2i06")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4, -4, -96)
+
 [node name="CutsceneTrigger" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9666, -89.7069)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9666, -166.057)
 script = ExtResource("9_elukc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CutsceneTrigger"]
 shape = SubResource("BoxShape3D_6d66q")
 
 [node name="hopper2" parent="." instance=ExtResource("10_gyxfl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -101.963)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5.87492, -169.145)
 animation = "turn_and_nod_r"
 
 [node name="hopper3" parent="." instance=ExtResource("10_gyxfl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -101.963)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 5.87492, -169.145)
 animation = "turn_and_nod_l"
 
 [connection signal="cutscene_start" from="CutsceneTrigger" to="hopper2" method="_on_cutscene_start"]

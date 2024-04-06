@@ -62,7 +62,7 @@ blend_shape_mode = 0
 
 [sub_resource type="Animation" id="Animation_36o3w"]
 resource_name = "turn_and_nod_l"
-length = 2.75
+length = 3.0
 tracks/0/type = "rotation_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -87,7 +87,7 @@ tracks/2/keys = PackedFloat32Array(0, 1, -0.0148798, -3.64853e-15, -3.54762e-09,
 
 [sub_resource type="Animation" id="Animation_36bbn"]
 resource_name = "turn_and_nod_r"
-length = 2.75
+length = 3.0
 tracks/0/type = "rotation_3d"
 tracks/0/imported = true
 tracks/0/enabled = true

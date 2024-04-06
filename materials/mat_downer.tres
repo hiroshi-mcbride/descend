@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dss02xg4jeqr8"]
+
+[resource]
+albedo_color = Color(0.337255, 0.466667, 0.541176, 1)
+rim = 0.0
+subsurf_scatter_strength = 1.0
+subsurf_scatter_skin_mode = true
+distance_fade_mode = 1
+distance_fade_min_distance = 45.0
+distance_fade_max_distance = 15.0

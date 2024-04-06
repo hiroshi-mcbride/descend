@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c82gn6f7ccfkq"]
+
+[ext_resource type="Texture2D" uid="uid://bu1uxub2kepj" path="res://textures/frame005.png" id="1_vpxtj"]
+
+[resource]
+albedo_texture = ExtResource("1_vpxtj")
+metallic_specular = 0.0
+uv1_scale = Vector3(6, 6, 6)

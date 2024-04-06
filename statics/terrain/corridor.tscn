@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7iq3ywt42bqg"]
+
+[ext_resource type="PackedScene" uid="uid://dqr5gwkyg4b0i" path="res://statics/terrain/floor.tscn" id="1_tcqkh"]
+[ext_resource type="PackedScene" uid="uid://dk0faqlwluf0e" path="res://statics/terrain/wall.tscn" id="2_dqett"]
+
+[node name="corridor" type="Node3D"]
+
+[node name="floor" parent="." instance=ExtResource("1_tcqkh")]
+
+[node name="floor2" parent="." instance=ExtResource("1_tcqkh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="wall" parent="." instance=ExtResource("2_dqett")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, 4)
+
+[node name="wall2" parent="." instance=ExtResource("2_dqett")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, -4)
+
+[node name="wall3" parent="." instance=ExtResource("2_dqett")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 4)
+
+[node name="wall4" parent="." instance=ExtResource("2_dqett")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, -4)

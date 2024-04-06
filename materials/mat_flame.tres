@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bu5t0gc7jpdqc"]
+
+[resource]
+albedo_color = Color(1, 0.933333, 0, 1)
+emission_enabled = true
+emission = Color(0.898039, 0.839216, 0, 1)
+emission_energy_multiplier = 8.88
+subsurf_scatter_strength = 1.0
+backlight = Color(1, 0, 0, 1)
+disable_receive_shadows = true
+distance_fade_mode = 1
+distance_fade_min_distance = 40.0
+distance_fade_max_distance = 20.0

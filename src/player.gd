@@ -1,6 +1,7 @@
-extends CharacterBody3D
+class_name Player extends CharacterBody3D
 
-@onready var head : Node3D = get_node("feller2/head")
+@onready var head : Node3D = $feller2/head
+
 var look_vector : Vector2
 @export var mouse_sensitivity : float
 
@@ -8,10 +9,13 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta):
+	# movement
 	var inputVector = Input.get_vector("move_left", "move_right", "move_down", "move_up")
 	var dir = basis * Vector3(inputVector.x, 0, -inputVector.y)
-	velocity = dir * 10
+	velocity = dir * 7
 	move_and_slide()
+	
+	# camera rotation
 	var rot_x = head.rotation.x - look_vector.y * delta
 	rot_x = clampf(rot_x, -PI*0.4, PI*0.49)
 	rot_x -= head.rotation.x

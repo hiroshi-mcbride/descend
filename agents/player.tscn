@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dlumhgvhn88js"]
+[gd_scene load_steps=12 format=3 uid="uid://dlumhgvhn88js"]
 
 [ext_resource type="PackedScene" uid="uid://kf2h80ahh8ov" path="res://0blender/feller.blend" id="1_cn2ha"]
 [ext_resource type="Script" path="res://src/player.gd" id="1_d6k51"]
+[ext_resource type="Material" uid="uid://b7jaroxk1tfml" path="res://materials/mat_player.tres" id="3_yqlip"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8fjx"]
 
@@ -84,14 +85,17 @@ mouse_sensitivity = 0.5
 [node name="feller2" parent="." instance=ExtResource("1_cn2ha")]
 
 [node name="head" parent="feller2" index="0"]
+material_override = ExtResource("3_yqlip")
 mesh = SubResource("ArrayMesh_d8gqh")
 
 [node name="Camera3D" type="Camera3D" parent="feller2/head" index="0"]
 attributes = SubResource("CameraAttributesPractical_bn8cq")
 current = true
+far = 32768.0
 
 [node name="torso" parent="feller2" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.701847)
+material_override = ExtResource("3_yqlip")
 mesh = SubResource("ArrayMesh_5qpps")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

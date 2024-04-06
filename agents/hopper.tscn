@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4lskocro60dg"]
+
+[ext_resource type="PackedScene" uid="uid://catuh71gneyot" path="res://0blender/hopper.blend" id="1_atdk2"]
+
+[node name="hopper" instance=ExtResource("1_atdk2")]

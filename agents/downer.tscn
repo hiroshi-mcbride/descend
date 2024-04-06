@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmcsyggoxrvvs"]
+
+[ext_resource type="PackedScene" uid="uid://cagouu8p5v4mb" path="res://0blender/downer.blend" id="1_gjjs8"]
+[ext_resource type="Material" uid="uid://dss02xg4jeqr8" path="res://materials/mat_downer.tres" id="2_foypy"]
+
+[node name="downer" instance=ExtResource("1_gjjs8")]
+
+[node name="head" parent="." index="0"]
+material_override = ExtResource("2_foypy")
+
+[node name="torso" parent="." index="1"]
+material_override = ExtResource("2_foypy")

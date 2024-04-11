@@ -1,0 +1,203 @@
+[gd_scene load_steps=15 format=3 uid="uid://dosl8s60yc56p"]
+
+[ext_resource type="Script" path="res://src/start_game.gd" id="1_its3j"]
+[ext_resource type="Material" uid="uid://ct8f4g2dumoti" path="res://fx/volumetric/black_fog.tres" id="2_n2nsy"]
+[ext_resource type="PackedScene" uid="uid://dmcsyggoxrvvs" path="res://agents/downer.tscn" id="3_4g25b"]
+[ext_resource type="PackedScene" uid="uid://c7iq3ywt42bqg" path="res://statics/terrain/corridor.tscn" id="4_podtk"]
+[ext_resource type="PackedScene" uid="uid://dk0faqlwluf0e" path="res://statics/terrain/wall.tscn" id="5_rvo74"]
+[ext_resource type="PackedScene" uid="uid://dqr5gwkyg4b0i" path="res://statics/terrain/floor.tscn" id="6_2wveo"]
+[ext_resource type="PackedScene" uid="uid://dx3ul5iu3wu66" path="res://statics/terrain/floor_half.tscn" id="7_5qrg6"]
+[ext_resource type="PackedScene" uid="uid://dosfkfvl5bgm5" path="res://statics/lights/torch.tscn" id="8_0t2yk"]
+[ext_resource type="Theme" uid="uid://cnruhoc2leg76" path="res://ui/new_theme.tres" id="8_evleg"]
+
+[sub_resource type="Environment" id="Environment_3imyl"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.368627, 0.392157, 0.415686, 1)
+ambient_light_energy = 0.0
+reflected_light_source = 1
+tonemap_mode = 2
+glow_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_light_energy = 0.0
+fog_density = 0.1
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_digde"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jxeae"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7lqki"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uo6qv"]
+_data = {
+"RESET": SubResource("Animation_digde"),
+"fade_in": SubResource("Animation_jxeae"),
+"fade_out": SubResource("Animation_7lqki")
+}
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_its3j")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
+environment = SubResource("Environment_3imyl")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.82625, 0, -20.4219)
+
+[node name="FogVolume" type="FogVolume" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000198364, 0, -38.1928)
+size = Vector3(97.7519, 68.3612, 170.356)
+material = ExtResource("2_n2nsy")
+metadata/_edit_lock_ = true
+
+[node name="downer" parent="Node3D" instance=ExtResource("3_4g25b")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.60412, 0, -81.6811)
+
+[node name="environment" type="Node3D" parent="Node3D"]
+
+[node name="corridor5" parent="Node3D/environment" instance=ExtResource("4_podtk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -64)
+
+[node name="floor3" parent="Node3D/environment/corridor5" instance=ExtResource("6_2wveo")]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 14.3725, -20.9337)
+
+[node name="corridor6" type="Node3D" parent="Node3D/environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -80)
+
+[node name="floor" parent="Node3D/environment/corridor6" instance=ExtResource("6_2wveo")]
+
+[node name="floor_half" parent="Node3D/environment/corridor6" instance=ExtResource("7_5qrg6")]
+
+[node name="wall" parent="Node3D/environment/corridor6" instance=ExtResource("5_rvo74")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, 4)
+
+[node name="wall3" parent="Node3D/environment/corridor6" instance=ExtResource("5_rvo74")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 4)
+
+[node name="torch5" parent="Node3D/environment" instance=ExtResource("8_0t2yk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.29154, 4.31295, -79.2627)
+
+[node name="torch6" parent="Node3D/environment" instance=ExtResource("8_0t2yk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.292, 4.31295, -79.2627)
+
+[node name="torch7" parent="Node3D/environment" instance=ExtResource("8_0t2yk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.29154, 11.6809, -94.2958)
+
+[node name="torch8" parent="Node3D/environment" instance=ExtResource("8_0t2yk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.292, 11.6809, -94.2958)
+
+[node name="wall5" parent="Node3D/environment" instance=ExtResource("5_rvo74")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, -92)
+
+[node name="wall6" parent="Node3D/environment" instance=ExtResource("5_rvo74")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, -92)
+
+[node name="floor_half3" parent="Node3D/environment" instance=ExtResource("7_5qrg6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, -92)
+
+[node name="floor_half4" parent="Node3D/environment" instance=ExtResource("7_5qrg6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -92)
+
+[node name="wall3" parent="Node3D/environment" instance=ExtResource("5_rvo74")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, -84)
+
+[node name="wall4" parent="Node3D/environment" instance=ExtResource("5_rvo74")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, -84)
+
+[node name="wall7" parent="Node3D/environment" instance=ExtResource("5_rvo74")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 8, -92)
+
+[node name="wall8" parent="Node3D/environment" instance=ExtResource("5_rvo74")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 8, -92)
+
+[node name="wall9" parent="Node3D/environment" instance=ExtResource("5_rvo74")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 8, -84)
+
+[node name="wall10" parent="Node3D/environment" instance=ExtResource("5_rvo74")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 8, -84)
+
+[node name="floor4" parent="Node3D/environment" instance=ExtResource("6_2wveo")]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 2.353, -90.343)
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(-0.978913, -0.0790525, 0.188363, -0.0664828, 0.995176, 0.0721492, -0.193158, 0.0581049, -0.979446, -1.52814, 2.40386, -85.399)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 335.0
+offset_top = 277.0
+offset_right = 961.0
+offset_bottom = 474.0
+theme = ExtResource("8_evleg")
+theme_override_font_sizes/font_size = 144
+text = "HOLLOW"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_left = 447.0
+offset_top = 525.0
+offset_right = 850.0
+offset_bottom = 579.0
+theme = ExtResource("8_evleg")
+theme_override_font_sizes/font_size = 32
+text = "PRESS ANY KEY TO START"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_uo6qv")
+}
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/AnimationPlayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)

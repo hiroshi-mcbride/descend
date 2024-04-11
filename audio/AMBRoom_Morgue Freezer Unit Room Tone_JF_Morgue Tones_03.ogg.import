@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ld0plw8wclyq"
+path="res://.godot/imported/AMBRoom_Morgue Freezer Unit Room Tone_JF_Morgue Tones_03.ogg-d423a9a0e8a167f0d7e18dbf01b4e727.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/AMBRoom_Morgue Freezer Unit Room Tone_JF_Morgue Tones_03.ogg"
+dest_files=["res://.godot/imported/AMBRoom_Morgue Freezer Unit Room Tone_JF_Morgue Tones_03.ogg-d423a9a0e8a167f0d7e18dbf01b4e727.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

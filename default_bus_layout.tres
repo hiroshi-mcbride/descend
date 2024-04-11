@@ -1,0 +1,16 @@
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://cha8jdbgc4xv0"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_7wk54"]
+resource_name = "Reverb"
+room_size = 0.2
+damping = 0.1
+
+[resource]
+bus/1/name = &"Corridor"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectReverb_7wk54")
+bus/1/effect/0/enabled = true

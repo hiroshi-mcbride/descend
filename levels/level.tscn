@@ -174,7 +174,7 @@ material = SubResource("StandardMaterial3D_s4bkm")
 size = Vector3(64, 1024, 64)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6d66q"]
-size = Vector3(15.635, 10.0159, 4.93872)
+size = Vector3(15.635, 10.0159, 4.64325)
 
 [node name="Node3D" type="Node3D"]
 
@@ -184,6 +184,7 @@ environment = SubResource("Environment_3imyl")
 [node name="player" parent="." instance=ExtResource("1_quota")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.899)
 floor_max_angle = 1.0472
+speed = 3.1
 
 [node name="FogVolume" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000198364, 0, -38.1928)
@@ -397,7 +398,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9666, -166.057)
 script = ExtResource("9_elukc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CutsceneTrigger"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 23.992)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 23.3366)
 shape = SubResource("BoxShape3D_6d66q")
 
 [node name="hopper2" parent="." instance=ExtResource("10_gyxfl")]

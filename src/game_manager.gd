@@ -9,6 +9,7 @@ var overlay : Overlay
 
 
 func _enter_tree():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	current_level = TITLESCREEN.instantiate()
 	add_child(current_level)
 	assert(current_level is TitleScreen)

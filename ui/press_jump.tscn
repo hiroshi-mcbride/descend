@@ -1,0 +1,103 @@
+[gd_scene load_steps=9 format=3 uid="uid://ckh0xru7qgwmv"]
+
+[ext_resource type="Script" path="res://ui/press_jump.gd" id="1_3fpv5"]
+[ext_resource type="Texture2D" uid="uid://hmnbf2g2t5my" path="res://ui/pressjump.png" id="2_cvyf6"]
+
+[sub_resource type="Animation" id="Animation_27o75"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0kxie"]
+resource_name = "fade_from_black"
+length = 1.5
+
+[sub_resource type="Animation" id="Animation_ua0iu"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8k1rv"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_egcfl"]
+resource_name = "fade_to_black"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_big5d"]
+_data = {
+"RESET": SubResource("Animation_27o75"),
+"fade_from_black": SubResource("Animation_0kxie"),
+"fade_in": SubResource("Animation_ua0iu"),
+"fade_out": SubResource("Animation_8k1rv"),
+"fade_to_black": SubResource("Animation_egcfl")
+}
+
+[node name="ui_overlay" type="CanvasLayer"]
+layer = 15
+script = ExtResource("1_3fpv5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_big5d")
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -113.0
+offset_top = -68.0
+offset_right = 114.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_cvyf6")
+stretch_mode = 4

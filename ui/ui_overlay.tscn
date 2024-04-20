@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://64875gwck0rt"]
 
-[ext_resource type="Script" path="res://ui/ui_overlay.gd" id="1_pt1b0"]
+[ext_resource type="Script" path="res://src/ui_overlay.gd" id="1_pt1b0"]
 
 [sub_resource type="Animation" id="Animation_27o75"]
 length = 0.001

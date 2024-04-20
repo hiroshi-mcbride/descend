@@ -1,6 +1,6 @@
 class_name Player extends CharacterBody3D
 
-enum InputState { GAMEPAD, MKB }
+enum InputState { DISABLED, GAMEPAD, MKB }
 @export var mouse_sensitivity : float
 @export_range(0.0, 10.0, 0.1) var speed : float
 
@@ -12,14 +12,21 @@ var last_rot_x : float
 var last_rot_y : float
 var input_state : InputState = InputState.MKB
 
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta):
-	# movement
-	var move_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var dir = basis * Vector3(move_vector.x, 0, move_vector.y) * speed
-	velocity = Vector3(dir.x, velocity.y, dir.z)
-	velocity.y -= gravity * delta
-	move_and_slide()
+	if input_state == InputState.DISABLED:
+		velocity.y -= gravity * delta
+		velocity.z = lerpf(velocity.z, 0, delta)
+		move_and_slide()
+	else:
+		# movement
+		var move_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		var dir = basis * Vector3(move_vector.x, 0, move_vector.y) * speed
+		velocity = Vector3(dir.x, velocity.y, dir.z)
+		velocity.y -= gravity * delta
+		move_and_slide()
 	
 	# camera rotation
 	
@@ -40,8 +47,15 @@ func _physics_process(delta):
 	look_vector = Vector2.ZERO
 
 func _input(event):
+	
 	if event is InputEventMouseMotion:
 		# modify accumulated mouse rotation
 		#print_debug("event is registering")
-		input_state = InputState.MKB
+		if input_state != InputState.DISABLED:
+			input_state = InputState.MKB
 		look_vector = event.relative
+
+
+func _on_player_jumped():
+	input_state = InputState.DISABLED
+	velocity = Vector3(0, 10, -15)

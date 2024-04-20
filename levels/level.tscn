@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://vlo3pwlffxat"]
+[gd_scene load_steps=34 format=3 uid="uid://vlo3pwlffxat"]
 
 [ext_resource type="PackedScene" uid="uid://dlumhgvhn88js" path="res://agents/firstperson_player.tscn" id="1_quota"]
 [ext_resource type="PackedScene" uid="uid://c7iq3ywt42bqg" path="res://statics/terrain/corridor.tscn" id="2_g8ogu"]
@@ -11,6 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://dx3ul5iu3wu66" path="res://statics/terrain/floor_half.tscn" id="7_aab43"]
 [ext_resource type="Script" path="res://src/scene_trigger.gd" id="9_elukc"]
 [ext_resource type="PackedScene" uid="uid://bcjqelvsqhhj5" path="res://agents/hopper_2.tscn" id="10_gyxfl"]
+[ext_resource type="PackedScene" uid="uid://ckh0xru7qgwmv" path="res://ui/press_jump.tscn" id="12_4dkqu"]
+[ext_resource type="Script" path="res://src/player_jump.gd" id="12_nnu2m"]
+[ext_resource type="Script" path="res://src/music_trigger.gd" id="14_64r54"]
 
 [sub_resource type="Environment" id="Environment_3imyl"]
 background_mode = 1
@@ -24,7 +27,7 @@ fog_light_color = Color(0, 0, 0, 1)
 fog_light_energy = 0.0
 fog_density = 0.1
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
+volumetric_fog_density = 0.001
 volumetric_fog_albedo = Color(0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sni3f"]
@@ -176,13 +179,24 @@ size = Vector3(64, 1024, 64)
 [sub_resource type="BoxShape3D" id="BoxShape3D_6d66q"]
 size = Vector3(15.635, 10.0159, 4.64325)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_j0vaw"]
+size = Vector3(19.0452, 7.75012, 2.84424)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2w8rh"]
+size = Vector3(19.0452, 7.75012, 2.33923)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b140a"]
+size = Vector3(16.7627, 8.89441, 3.80788)
+
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_3imyl")
 
 [node name="player" parent="." instance=ExtResource("1_quota")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.899)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8147e-06, 0.00389957, 0.494995)
+collision_layer = 3
+collision_mask = 3
 floor_max_angle = 1.0472
 speed = 3.1
 
@@ -394,7 +408,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 8,
 transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 2.353, -90.343)
 
 [node name="CutsceneTrigger" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9666, -166.057)
+transform = Transform3D(0.990802, 0, 0, 0, 0.990802, 0, 0, 0, 0.990802, 0, 3.9666, -166.057)
 script = ExtResource("9_elukc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CutsceneTrigger"]
@@ -409,5 +423,42 @@ animation = "turn_and_nod_r"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 8.00495, -158.154)
 animation = "turn_and_nod_l"
 
+[node name="press_jump" parent="." instance=ExtResource("12_4dkqu")]
+
+[node name="player_jump" type="Node3D" parent="."]
+script = ExtResource("12_nnu2m")
+
+[node name="Area3D" type="Area3D" parent="player_jump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.9587, -157.808)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="player_jump/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.658569)
+shape = SubResource("BoxShape3D_j0vaw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="player_jump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.17425, -161.126)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player_jump/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.37506, 0.0662231)
+shape = SubResource("BoxShape3D_2w8rh")
+
+[node name="Timer" type="Timer" parent="player_jump"]
+process_callback = 0
+wait_time = 10.0
+one_shot = true
+
+[node name="music_trigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, -97)
+script = ExtResource("14_64r54")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="music_trigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9472, -2.57385)
+shape = SubResource("BoxShape3D_b140a")
+
 [connection signal="cutscene_start" from="CutsceneTrigger" to="hopper2" method="_on_cutscene_start"]
 [connection signal="cutscene_start" from="CutsceneTrigger" to="hopper3" method="_on_cutscene_start"]
+[connection signal="player_jumped" from="player_jump" to="player" method="_on_player_jumped"]
+[connection signal="body_entered" from="player_jump/Area3D" to="player_jump" method="_on_player_entered"]
+[connection signal="body_exited" from="player_jump/Area3D" to="player_jump" method="_on_player_exited"]

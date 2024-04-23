@@ -2,7 +2,7 @@ LICENSE
 
 Certain assets used in this project are not my own, and their original creators' license terms apply. You are not permitted to re-use or redistribute the files in the textures folder, nor derivative works thereof.
 
-Everything else should be fine :) see below
+Everything else should be fine :)
 
 
 MIT License
